@@ -1,0 +1,9 @@
+Host: localhost
+Port: 50051
+DB:
+  Host: localhost
+  Port: 5432
+  Username: abc
+  Name: user
+  Password: abc
+  SSLMode: disable

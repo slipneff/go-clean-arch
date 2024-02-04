@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package user;
+option go_package = "/user";
+
+service UserService {
+  rpc CreateUser(CreateUserRequest) returns (UserResponse) {}
+  rpc GetUserById(GetUserByIdRequest) returns (UserResponse) {}
+  rpc GetUserByName(GetUserByNameRequest) returns (UserResponse) {}
+  rpc GetAllUser(GetAllUserRequest) returns (GetAllUserResponse) {}
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse) {}
+  rpc DeleteUser(DeleteUserRequest) returns (UserResponse) {}
+}
+
+message User {
+    string user_id = 1;
+    string name = 2;
+}
+enum UserErrorCode {
+    USER_ERROR_CODE_UNSPECIFIED = 0;
+    USER_ERROR_CODE_NOT_FOUND = 1;
+    USER_ERROR_CODE_VALIDATION = 2;
+    USER_ERROR_CODE_INVALID_FOREIGN_KEY = 3;
+    USER_ERROR_CODE_ALREADY_EXIST = 4;
+}
+message UserResponse {
+    User User = 1;
+    UserErrorCode error = 2;
+}
+
+message CreateUserRequest {
+    User User = 1;
+}
+message GetUserByIdRequest {
+    string user_id = 1;
+}
+message GetUserByNameRequest {
+    string name = 1;
+}
+message UpdateUserRequest {
+    User User = 1;
+}
+message DeleteUserRequest {
+    string user_id = 1;
+}
+message GetAllUserRequest {
+}
+
+message GetAllUserResponse {
+    repeated User users = 1;
+    UserErrorCode error = 2;
+}
